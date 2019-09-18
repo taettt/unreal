@@ -2,7 +2,8 @@
 
 #pragma once
 
-#include "EngineMinimal.h"
+#include "ArenaBattle.h"
+#include "GameFramework/RotatingMovementComponent.h"
 #include "GameFramework/Actor.h"
 #include "Fountain.generated.h"
 
@@ -18,6 +19,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void PostInitializeComponents() override;
 
 public:	
 	// Called every frame
@@ -29,4 +31,14 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent *Water;
 
+	UPROPERTY(VisibleAnywhere)
+	UParticleSystemComponent *Particle;
+
+	UPROPERTY(VisibleAnywhere)
+	URotatingMovementComponent *Movement;
+
+private:
+	// editor에서 관리 가능
+	UPROPERTY(EditAnywhere, Category=Stat, Meta=(AllowPrivateAccess=true))
+	float RotateSpeed;
 };
